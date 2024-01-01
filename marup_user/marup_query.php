@@ -69,25 +69,3 @@ function id_get(object $pdo,int $id){
 }
 
 }
-
-
-// function user_informations_input(object $pdo, string $username, $mobile_number, string $bio, string $birthdate, $gender, string $profile_image, $username, $user_email, $user_password)
-// {
-//   personal_info_input( $pdo, $username, $mobile_number, $bio, $birthdate, $gender, $profile_image);
-//   user_input( $pdo , $username, $user_email, $user_password);
-//     $query = "INSERT INTO user_informations (Full_Name, mobile_number, bio, birthdate, gender, profile_image, username, user_email, user_password)
-//               VALUES (:Full_Name, :mobile_number, :bio, :birthdate, :gender, :profile_image, :username, :user_email, :user_password);";
-//     $stmt = $pdo->prepare($query);
-//     $stmt->bindParam(":Full_Name", $username);
-//     $stmt->bindParam(":mobile_number", $mobile_number);
-//     $stmt->bindParam(":bio", $bio);
-//     $stmt->bindParam(":birthdate", $birthdate);
-//     $stmt->bindParam(":gender", $gender);
-//     $stmt->bindParam(":profile_image", $profile_image);
-//     $stmt->bindParam(":username", $username);
-//     $stmt->bindParam(":user_email", $user_email);
-//     $stmt->bindParam(":user_password", $user_password);
-//     $stmt->execute();
-    
-//     // No need to redirect here, as the redirection is handled in the user_input function
-// }

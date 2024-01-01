@@ -42,13 +42,22 @@ if (isset($_POST['user_password'])) {
         if (is_email_already_registered($pdo,$user_email)) {
             $errors[] = "email_register_already=USERS EMAIL IS ALREADY TAKEN";
         }
+        $isUsernameAvailable = username_already_inserted($pdo, $username, $user_email, $user_password);
+
+        if ($isUsernameAvailable) {
+            // The username is available, proceed with your logic
+            user_input($pdo,$username,$user_email,$user_password);
+        } else {
+            // The username is not available, handle accordingly (e.g., show an error message)
+            $errors[] = "invalid_users=USERS NAME IS already available";
+        }
     if ($errors) {
         $_SESSION["errors_signup"] = $errors;
         header("Location:http://localhost/facebook_like_project/signup/signup.php");
         die();
     }
     //    error handel Ends  
-            user_input($pdo,$username,$user_email,$user_password);
+            // user_input($pdo,$username,$user_email,$user_password);
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }

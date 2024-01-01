@@ -113,12 +113,13 @@ include_once "../session.php";
      
     
         // Check if a new image is uploaded
-        if (isset($_FILES["profile_image"]["name"]))  {
+        // if (isset($_FILES["profile_image"]["name"])){
+        if (isset($_FILES["profile_image"]["name"])){
             $profile_image = $_FILES["profile_image"]["name"];
             if ($profile_image != "") {
                 // Upload the new image
                 $ext = pathinfo($profile_image, PATHINFO_EXTENSION);
-                $profile_image = "Food_Category" . rand(0, 999) . "." . $ext;
+                $profile_image = "sigup_users" . rand(0, 999) . "." . $ext;
                 $source_path = $_FILES["profile_image"]["tmp_name"];
                 $destination_path = "../upload_images/".$profile_image;
                 $upload = move_uploaded_file($source_path, $destination_path);
@@ -134,7 +135,7 @@ include_once "../session.php";
         } 
         else {
             // If no new file is uploaded, use the current image name
-            $profile_image=$current_img;
+            $profile_image=$_POST["current_img"];
             // $current_img=$profile_image;
         }
     

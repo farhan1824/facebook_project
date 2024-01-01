@@ -32,6 +32,21 @@ function user_email_validation(object $pdo ,string $user_email){
     $query = null;
     $stmt = null;
 }
+function username_already_inserted(object $pdo, string $username, string $user_email, string $user_password) {
+    // Check if the username is available
+    $queryCheck = "SELECT COUNT(*) FROM signup WHERE username = :username";
+    $stmtCheck = $pdo->prepare($queryCheck);
+    $stmtCheck->bindParam(':username', $username);
+    $stmtCheck->execute();
 
+    // If count is 0, the username is available; otherwise, it's not
+    if ($stmtCheck->fetchColumn() == 0) {
+        // Insert the record if the username is available
+        return true;
+    } else {
+        // Return false if the username is not available
+        return false;
+    }
+}
 
 
