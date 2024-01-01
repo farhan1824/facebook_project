@@ -42,14 +42,14 @@ if (isset($_POST['user_password'])) {
         if (is_email_already_registered($pdo,$user_email)) {
             $errors[] = "email_register_already=USERS EMAIL IS ALREADY TAKEN";
         }
-        $isUsernameAvailable = username_already_inserted($pdo, $username, $user_email, $user_password);
+        $isUsernameAvailable = username_already_inserted($pdo, $username, $user_email);
 
         if ($isUsernameAvailable) {
             // The username is available, proceed with your logic
             user_input($pdo,$username,$user_email,$user_password);
         } else {
             // The username is not available, handle accordingly (e.g., show an error message)
-            $errors[] = "invalid_users=USERS NAME IS already available";
+            $errors[] = "invalid_users=USERS NAME IS ALREADY TAKEN";
         }
     if ($errors) {
         $_SESSION["errors_signup"] = $errors;

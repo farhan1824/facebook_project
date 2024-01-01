@@ -13,8 +13,6 @@
 <?php
     require_once "../pdo.php";
     $query = "SELECT * FROM personal_info WHERE id = (SELECT MAX(id) FROM personal_info)";
-    // $query = "SELECT * FROM personal_info WHERE id = :id";
-    // $query = "SELECT * FROM signup WHERE id = (SELECT MAX(id) FROM signup)";
     $stmt = $pdo->prepare($query);
     if ($stmt->execute()) {
         while( $results = $stmt->fetch(PDO::FETCH_ASSOC) ){
@@ -66,7 +64,7 @@
         <!-- <a href="http://localhost/facebook_like_project/login/login.php" class="link link-success">To Delete Or Update plz login</a> -->
         <!-- <a href=""class="btn btn-active btn-secondary">Delete</a> -->
         <a href="users_delete.php?id=<?php echo $id ?>&profile_image=<?php echo $profile_image;?>"class="btn btn-active btn-secondary" >Delete</a>
-<a href="users_update.php?id=<?php echo $id ?>&profile_image=<?php echo $profile_image;?>"class="btn btn-active btn-secondary" >Update</a>
+<a href="users_update.php?id=<?php echo $id ?>&profile_image=<?php echo $profile_image;?>"class="btn btn-active btn-secondary">Update</a>
     </div>
 </div>
 

@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_FILES["profile_image"]["name"])) {
         $profile_image = $_FILES["profile_image"]["name"];
         $ext = pathinfo($profile_image, PATHINFO_EXTENSION);
-        $profile_image = "Food_Category" . rand(0, 999) . "." . $ext;
+        $profile_image = "signup_users" . rand(0, 999) . "." . $ext;
         $source_path = $_FILES["profile_image"]["tmp_name"];
         $destination_path = "../upload_images/" . $profile_image;
         // $destination_path = "upload_images/" . $profile_image;
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location:http://localhost/facebook_like_project/marup_user/markup_user.php");
             die();
         } 
-        
+
             // personal_info_input($pdo, $username, $mobile_number, $bio, $birthdate, $gender, $profile_image);
             personal_info($pdo, $username, $mobile_number, $bio, $birthdate, $gender, $profile_image);
             id_get($pdo,$id);
