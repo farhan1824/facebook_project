@@ -14,8 +14,6 @@ function user_input(object $pdo ,string $username,string $user_email,string $use
     $query = null;
     $stmt = null;
 }
-// user_informations_input( $pdo,  $Full_Name, $mobile_number,  $bio,  $birthdate, $gender,  $profile_image, $username, $user_email, $user_password);
-// user_input( $pdo , $username, $user_email, $user_password);
 function username_input(object $pdo ,string $username){
     $query="SELECT username FROM signup WHERE username=:username ;";
     $stmt =$pdo->prepare($query);

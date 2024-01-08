@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // personal_info_input($pdo, $username, $mobile_number, $bio, $birthdate, $gender, $profile_image);
             personal_info($pdo, $username, $mobile_number, $bio, $birthdate, $gender, $profile_image);
             id_get($pdo,$id);
-    } catch (PDOException $e) {
+    }
+     catch (PDOException $e) {
         $_SESSION["user_input"] = "Database error: " . $e->getMessage();
         header("Location:http://localhost/facebook_like_project/marup_user/markup_user.php");
         exit();

@@ -16,10 +16,17 @@ function personal_info_input(object $pdo,string $username, $mobile_number,string
     $stmt->bindparam(":birthdate", $birthdate);
     $stmt->bindparam(":gender", $gender);
     $stmt->bindparam(":profile_image", $profile_image);
-    $stmt->execute();
-    $query = null;
-    $stmt = null;
+    if($stmt->execute()){
     header("location:http://localhost/facebook_like_project/users/users.php");
+    exit();
+    }
+    else{
+      // $errorInfo = $stmt->errorInfo();
+      session_start();
+      session_unset();
+      session_destroy();
+    }
+
 }
 
 function personal_info(object $pdo,string $username, $mobile_number,string $bio,string $birthdate, $gender,string $profile_image) {
@@ -37,6 +44,17 @@ function personal_info(object $pdo,string $username, $mobile_number,string $bio,
           personal_info_input( $pdo, $username, $mobile_number, $bio, $birthdate, $gender, $profile_image);
           // Perform login actions or redirect as needed
 
+
+
+
+
+        //   if else condition aply kora lagbe
+ 
+        
+
+
+
+
       } else {
           // User does not exist in signup table
           // Redirect to login page
@@ -46,8 +64,6 @@ function personal_info(object $pdo,string $username, $mobile_number,string $bio,
       }
   }
 
-  $query = null;
-  $stmt = null;
 }
 function input_empty(string $username, $mobile_number, string $bio, string $birthdate,  $gender, string $profile_image)
 {

@@ -8,14 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body>
 <?php
     require_once "../pdo.php";
     $query = "SELECT * FROM personal_info WHERE id = (SELECT MAX(id) FROM personal_info)";
     $stmt = $pdo->prepare($query);
+    
     if ($stmt->execute()) {
-        while( $results = $stmt->fetch(PDO::FETCH_ASSOC) ){
+        while ($results = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $id = $results['id'];
             $username = $results['username'];
             $mobile_number = $results['mobile_number'];
@@ -23,15 +23,11 @@
             $birthdate = $results['birthdate'];
             $gender = $results['gender'];
             $profile_image = $results['profile_image'];
+    
             // echo $id,$full_name,$mobile_number,$bio,$birthdate,$gender,$profile_image;
         }
     } 
     ?>
-
-
-
-
-
 <div role="tablist" class="tabs tabs-lifted bg-white">
     <!-- Tab 1 -->
     <input type="radio" name="my_tabs_2" role="tab" class="tab text-[#C76D47]" aria-label="User Info" checked/>
@@ -64,8 +60,25 @@
         <!-- <a href="http://localhost/facebook_like_project/login/login.php" class="link link-success">To Delete Or Update plz login</a> -->
         <!-- <a href=""class="btn btn-active btn-secondary">Delete</a> -->
         <a href="users_delete.php?id=<?php echo $id ?>&profile_image=<?php echo $profile_image;?>"class="btn btn-active btn-secondary" >Delete</a>
-<a href="users_update.php?id=<?php echo $id ?>&profile_image=<?php echo $profile_image;?>"class="btn btn-active btn-secondary">Update</a>
-    </div>
+        <a href="users_update.php?id=<?php echo $id ?>&profile_image=<?php echo $profile_image;?>"class="btn btn-active btn-secondary">Update</a>
+        <br>
+        <a href="?signout" class="btn btn-danger mt-5">signout</a>
+        </div>
+        
+<?php
+  session_start(); // Start the session if not already started
+
+  // Perform session unset and destroy when the user clicks on the logout link
+  if(isset($_GET['signout'])) {
+    session_unset();
+    session_destroy();
+    header("Location:http://localhost/facebook_like_project/signup/signup.php"); // Redirect to the login page after logout
+    exit();
+  }
+?>
+
+
+
 </div>
 
 <section>
@@ -74,15 +87,5 @@
     require_once "../error_viewing.php";
     ?>
 </section>
-
-
-
-
-
-
-
- 
-
-
 </body>
 </html>

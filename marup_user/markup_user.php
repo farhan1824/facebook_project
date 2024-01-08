@@ -11,7 +11,7 @@
 <body>
     <div class="login-container">
         <h2>Personal Information</h2>
-        <form action="markup_user_form_handel.php" method="POST"  enctype="multipart/form-data">
+<form action="markup_user_form_handel.php" method="POST"  enctype="multipart/form-data">
         <label for="full_name">Full Name:</label>
     <input type="text" id="full_name" name="username" placeholder="Full Name" >
 

@@ -17,6 +17,10 @@ if (isset($_SESSION["user_input"])) {
     echo '<p style="color: red;">' . $_SESSION["user_input"] . '</p>';
     unset($_SESSION["user_input"]);
 }
+if (isset($_SESSION["user_visiblity"])) {
+    echo '<p style="color: red;">' . $_SESSION["user_visiblity"] . '</p>';
+    unset($_SESSION["user_visiblity"]);
+}
 if (isset($_SESSION["signup_error"])) {
     echo '<p style="color: red;">' . $_SESSION["signup_error"] . '</p>';
     unset($_SESSION["signup_error"]);

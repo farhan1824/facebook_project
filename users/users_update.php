@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,15 +24,15 @@ if (isset($_GET["id"]) && isset($_GET["profile_image"])) {
     if ($stmt->execute()) {
         $rows = $stmt->rowCount();
         if ($rows == 1) {
-            $results = $stmt->fetch(PDO::FETCH_ASSOC);
-            $id = $results["id"];
-            $username = $results['username'];
-            $mobile_number = $results['mobile_number'];
-            $bio = $results['bio'];
-            $birthdate = $results['birthdate'];
-            $gender = $results['gender'];
-            $current_img = $results["profile_image"];
-       
+           while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $id = $results["id"];
+                $username = $results['username'];
+                $mobile_number = $results['mobile_number'];
+                $bio = $results['bio'];
+                $birthdate = $results['birthdate'];
+                $gender = $results['gender'];
+                $current_img = $results["profile_image"];
+           }
         } 
         else {
             header("location:http://localhost/facebook_like_project/users/users.php");
@@ -70,7 +69,7 @@ if (isset($_GET["id"]) && isset($_GET["profile_image"])) {
 
 
 <label for="bio">Bio:</label>
-    <textarea id="bio" name="bio" rows="10" placeholder="Enter Your Bio" value="<?php echo $bio ?>"></textarea>
+    <textarea id="bio" name="bio" rows="10" placeholder="Enter Your Bio" value=""><?php echo $bio ?></textarea>
 
 
     <h3>Current IMAGE :</h3>
@@ -83,7 +82,9 @@ if (isset($_GET["id"]) && isset($_GET["profile_image"])) {
                 }
                 ?>  
          <input type="hidden" class="" name="current_img" value="<?php echo $current_img ?>">  
+
          
+         <!--  -->
          
    <label for="file-input" class="file-input-label">Update Profile picture:</label>
    <input type="file" id="file-input" class="file-input" name="profile_image">
@@ -151,17 +152,28 @@ include_once "../session.php";
             $stmt->bindParam(":mobile_number", $mobile_number);
             $stmt->bindParam(":bio", $bio);
             $stmt->bindParam(":profile_image", $profile_image);
-
-            
-
+            if ($stmt->execute()) {
 
 
-        if ($stmt->execute()) {
-            $_SESSION["Update"] = "Successfully updated";
+
+//                 $qs
+
+
+
+
+
+
+
+
+
+
+                $_SESSION["Update"] = "Successfully updated";
             header("Location:http://localhost/facebook_like_project/users/users.php");
-            // header("Location:http://localhost/facebook_like_project/check.php");
             exit();
-        } else {
+        
+        } 
+
+        else {
             $_SESSION["update"] = "Failed to update";
             header("Location: http://localhost/facebook_like_project/users/users_update.php?id=$id");
             exit();
@@ -172,3 +184,4 @@ include_once "../session.php";
         exit();
     }    
 
+// }
