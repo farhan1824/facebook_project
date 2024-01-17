@@ -84,13 +84,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["friend_request_submit"
         $request_to= name_collection($pdo,$send_to);
     $acceptButton = '<button  class="btn btn-primary">Accept</button>';
     $rejectButton = '<button class="btn btn-error">Reject</button>';
-$reqsend='<form action="" method="POST" class="flex">
-<button type="submit" class="btn btn-error">Reject</button>
-<button type="submit"  class="btn btn-primary">Accept</button>
-</form>';
+    $message = "<p class='text-xl p-5 bg-gray-600 text-stone-50 inline'>$request_from has sent you a friend request  $acceptButton $rejectButton</p>";
+    // $message = "<p class='text-xl p-5 bg-gray-600 text-stone-50 inline'>$request_from has sent you a friend request. $reqsend</p>";
 
-    // $message = "<p class='text-xl p-5 bg-gray-600 text-stone-50 inline'>$request_from has sent you a friend request  $acceptButton $rejectButton</p>";
-    $message = "<p class='text-xl p-5 bg-gray-600 text-stone-50 inline'>$request_from has sent you a friend request  $reqsend</p>";
     notification_send($pdo, $send_from, $send_to,$message);
     } catch (PDOException $e) {
         header("Location: http://localhost/facebook_like_project/login_users/login_users.php");

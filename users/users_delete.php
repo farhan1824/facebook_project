@@ -19,7 +19,13 @@ if(isset($_GET["id"])&&isset($_GET["profile_image"])){
     WHERE id=:id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":id", $id);
-    if($stmt ->execute()){
+    $stmt ->execute();
+
+    $query_signup="DELETE FROM signup
+    WHERE id=:id";
+    $stmt_signup = $pdo->prepare($query_signup);
+    $stmt_signup->bindParam(":id", $_SESSION["signup_id"]);
+    if($stmt_signup ->execute()){
         $_SESSION["account_delete"]="account is deleted";
         header("location:http://localhost/facebook_like_project/signup/signup.php");
         die();

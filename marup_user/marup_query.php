@@ -29,15 +29,41 @@ function personal_info_input(object $pdo,string $username, $mobile_number,string
 
 }
 
+// function personal_info(object $pdo,string $username, $mobile_number,string $bio,string $birthdate, $gender,string $profile_image) {
+//   $query = "SELECT * FROM signup";
+//   $stmt = $pdo->prepare($query);
+//   if ($stmt->execute()) {
+//       // $rows = $stmt->rowCount();
+//       while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
+// $username=$results["username"];
+     
+//       if($username==$_SESSION["signin_username"]){
+//       $_SESSION["signup_error"] = "User  Available";
+//           personal_info_input( $pdo, $username, $mobile_number, $bio, $birthdate, $gender, $profile_image);
+//       }
+//  else {
+//           // User does not exist in signup table
+//           // Redirect to login page
+//           $_SESSION["signup_error"] = "User Not Available";
+//           header("Location:http://localhost/facebook_like_project/signup/signup.php");
+//           exit();
+//       }
+
+//       }
+//        }
+//   }
+
+// }
+
 function personal_info(object $pdo,string $username, $mobile_number,string $bio,string $birthdate, $gender,string $profile_image) {
   $query = "SELECT * FROM signup WHERE username=:username;";
   $stmt = $pdo->prepare($query);
-  $stmt->bindParam(":username", $username);
-  // $stmt->bindParam(":user_password", $user_password);
-
+  // $stmt->bindParam(":username", $username);
+  $stmt->bindParam(":username", $_SESSION["signin_username"]);
   if ($stmt->execute()) {
       $rows = $stmt->rowCount();
       if ($rows == 1) {
+      // if ($rows == $_SESSION["signin_username"]) {
           // User exists in signup table
           // Insert into the login table
           $_SESSION["signup_error"] = "User  Available";
@@ -59,12 +85,13 @@ function personal_info(object $pdo,string $username, $mobile_number,string $bio,
           // User does not exist in signup table
           // Redirect to login page
           $_SESSION["signup_error"] = "User Not Available";
-          header("Location: http://localhost/facebook_like_project/login/login.php");
+          header("Location:http://localhost/facebook_like_project/signup/signup.php");
           exit();
       }
   }
 
 }
+
 function input_empty(string $username, $mobile_number, string $bio, string $birthdate,  $gender, string $profile_image)
 {
     return empty($username) || $mobile_number==0 || empty($bio) || empty($birthdate) || empty($gender) || empty($profile_image);

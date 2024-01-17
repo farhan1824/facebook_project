@@ -11,11 +11,11 @@
 <body>
 <?php
     require_once "../pdo.php";
-    $query = "SELECT * FROM personal_info WHERE id = (SELECT MAX(id) FROM personal_info)";
-    $stmt = $pdo->prepare($query);
-    
-    if ($stmt->execute()) {
-        while ($results = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    require_once "../session.php";
+    $query_01 = "SELECT * FROM personal_info WHERE id = (SELECT MAX(id) FROM personal_info)";
+    $stmt_01 = $pdo->prepare($query_01);
+    if ($stmt_01->execute()) {
+        while ($results = $stmt_01->fetch(PDO::FETCH_ASSOC)) {
             $id = $results['id'];
             $username = $results['username'];
             $mobile_number = $results['mobile_number'];
@@ -27,6 +27,18 @@
             // echo $id,$full_name,$mobile_number,$bio,$birthdate,$gender,$profile_image;
         }
     } 
+    $query_02 = "SELECT * FROM signup WHERE username=:username";
+    $stmt_02 = $pdo->prepare($query_02);
+    $stmt_02->bindParam(':username', $username);
+    if ($stmt_02->execute()) {
+        while ($final = $stmt_02->fetch(PDO::FETCH_ASSOC)) {
+            $signupid = $final["id"];
+            $_SESSION["signup_id"]=$signupid;
+        }
+    }
+
+
+
     ?>
 <div role="tablist" class="tabs tabs-lifted bg-white">
     <!-- Tab 1 -->
@@ -64,7 +76,24 @@
         <br>
         <a href="?signout" class="btn btn-danger mt-5">signout</a>
         </div>
-        
+        <?php
+    // require_once "../session.php";
+    // echo "<p class='text-black'>" . $_SESSION["signup_id"] . "</p>";
+  
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once "../session.php";
+// echo "<p class='text-black'>" . $signupid . "</p>";
+if (isset($_SESSION["signup_id"])) {
+    echo "<p class='text-black'>" . $_SESSION["signup_id"] . "</p>";
+    echo "<p class='text-black'>" . $_SESSION["signin_username"] . "</p>";
+
+} else {
+    echo "<p class='text-black'>No signup ID found in session</p>";
+}
+
+    ?>
 <?php
   session_start(); // Start the session if not already started
 

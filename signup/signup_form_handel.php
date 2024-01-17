@@ -4,15 +4,16 @@
     require_once "../error_handel.php";
     require_once "../session.php";
 if($_SERVER["REQUEST_METHOD"] === "POST"){
-  
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
-} else {
+    if (isset($_POST['id'])) {
+        $id = $_POST['id'];
+    } 
+    else {
     $id = null;
 }
 
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
+    $_SESSION["signin_username"]=$username;
 } else {
     $username = null;
 }

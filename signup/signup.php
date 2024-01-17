@@ -12,6 +12,7 @@
         <form action="signup_form_handel.php" method="POST">
             <label for="username">UserName:</label>
             <input type="text" id="username" name="username" placeholder="Enter your Name" >
+            <!-- <input type="text" id="id" name="id" placeholder="id" > -->
             <label for="username">Email:</label>
             <input type="text" id="user_email" name="user_email" placeholder="Enter your Email" >
             <label for="password">Password:</label>
@@ -23,6 +24,7 @@
     <?php 
     require_once "../error_viewing.php";
     error_output_signup();
+   
     ?>
 </body>
 </html>

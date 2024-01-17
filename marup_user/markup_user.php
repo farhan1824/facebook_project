@@ -44,11 +44,13 @@
 
 <br><br><br>
 <button type="submit">Submit</button>
+
         </form>
     </div>
     <?php
     require_once "./markup_user_form_handel.php";
 require_once "../error_viewing.php";
+
 ?>
 
 </body>
